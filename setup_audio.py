@@ -8,24 +8,25 @@ from gtts import gTTS
 
 if __name__ == '__main__':
 
-    # Set up messages
-    with open("messages.json") as m:
-        messages = json.load(m)
+    if '--messages' in sys.argv:
+        # Set up messages
+        with open("messages.json") as m:
+            messages = json.load(m)
 
-    with open("keys.json") as k:
-        keys = json.load(k)
+        with open("keys.json") as k:
+            keys = json.load(k)
 
-    os.makedirs("audio/messages", exist_ok=True)
+        os.makedirs("audio/messages", exist_ok=True)
 
-    for category, texts in messages.items():
-        for i, text in enumerate(texts):
-            if '__' in text:
-                for key in keys:
-                    tts = gTTS(text.replace('__', key).replace('_', ' '))
-                    tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
-            else:
-                tts = gTTS(text)
-                tts.save('audio/messages/{}{}.mp3'.format(category, i))
+        for category, texts in messages.items():
+            for i, text in enumerate(texts):
+                if '__' in text:
+                    for key in keys:
+                        tts = gTTS(text.replace('__', key).replace('_', ' '))
+                        tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
+                else:
+                    tts = gTTS(text)
+                    tts.save('audio/messages/{}{}.mp3'.format(category, i))
 
     if '--bg-music' in sys.argv:
         # Set up background music

@@ -21,7 +21,7 @@ Advanced Options > Audio > Force Headphone Jack
 This script downloads all the background music specified in background_music.json, and creates speech-to-text for all the phrases in messages.json
 
 ```
-    setup_audio.py
+    setup_audio.py --bg-music --messages
 ```
 
 ## Set up Keys
