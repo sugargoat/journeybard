@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     os.makedirs("audio/messages")
 
-    for category, texts in messages:
+    for category, texts in messages.items():
         for i, text in enumerate(texts):
             tts = gTTS(text)
             tts.save('audio/messages/{}{}.mp3'.format(category, i))

@@ -13,7 +13,7 @@ def random_welcome(bg_pid):
     rand_welcome = random.randint(0, len(messages["welcome"]) - 1)
     print("\n~=~=~=~=~=~=~=\n{}\n".format(messages["welcome"][rand_welcome]))
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
     filename = 'audio/Underground_Lake.mp3'
