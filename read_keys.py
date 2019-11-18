@@ -21,7 +21,7 @@ def random_muse_response(key, bg_pid):
     rand_muse_response = random.randint(0, len(messages["muse_return"]) - 1)
     print(messages["muse_return"][rand_muse_response].replace('__', key.strip()))
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key, rand_muse_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key, rand_muse_response)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
     with open("background_music.json") as b:
