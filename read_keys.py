@@ -49,7 +49,7 @@ if __name__ == '__main__':
     bg_pid = play_background()
 
     while True:
-        if not welcomed# and random.randint(0,100) < 12: FIXME: Something here to make it invite people in
+        if not welcomed
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
@@ -64,5 +64,8 @@ if __name__ == '__main__':
             exit()
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
+            welcomed = False
+        # Randomly reset to invite people in
+        if random.randint(0, 100) < 12:
             welcomed = False
         time.sleep(5)
