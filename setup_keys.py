@@ -21,5 +21,7 @@ if __name__ == '__main__':
             reader.write(key)
             print("Wrote {} to tag. Waiting 5 seconds.".format(key))
             time.sleep(5)
-        finally:
-            GPIO.cleanup()
+        except Exception as e:
+            print("Got exception {}".format(repr(e)))
+
+    GPIO.cleanup()
