@@ -27,7 +27,7 @@ def play_background():
     with open("background_music.json") as b:
         bg_music = json.load(b)
 
-    filename = random.choice(bg_music.keys())
+    filename = random.choice(list(bg_music.keys()))
     # Call out to OS to play the audio in a new process
     return subprocess.Popen(["mpg123", filename], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
