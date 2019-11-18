@@ -20,6 +20,7 @@ while True:
     except KeyboardInterrupt:
         print("Goodbye!")
         GPIO.cleanup()
+        exit()
     except Exception as e:
         print("Unfortunately, we cannot hear the tale of {} at the moment".format(text.strip()))
         welcomed = False
