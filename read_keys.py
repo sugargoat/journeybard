@@ -49,7 +49,7 @@ if __name__ == '__main__':
     bg_pid = play_background()
 
     while True:
-        if not welcomed
+        if not welcomed:
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
