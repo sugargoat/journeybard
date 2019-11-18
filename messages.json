@@ -1,4 +1,8 @@
 {
     "welcome": ["Welcome to the storied pages of the BardGuild. Please present your muse."],
-    "muse_return": ["Ah, the __ has returned. Do tell us of your journey."]
+    "muse_return": ["Ah, the __ has returned. Do tell us of your journey."],
+    "tale_response": [
+        "Thank you for that riveting tale. Please continue forth as a Build Gard Apprentice!",
+        "I'm going to stop you right there. That is not a tale worthy of the Build Gard. Please take another muse for inspiration and return to try again."
+    ]
 }

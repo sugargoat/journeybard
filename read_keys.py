@@ -23,13 +23,23 @@ def random_muse_response(key, bg_pid):
     bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key.strip(), rand_muse_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+def random_tale_response(bg_pid):
+    with open("messages.json") as m:
+        messages = json.load(m)
+    rand_tale_response = random.randint(0, len(messages["tale_response"]) - 1)
+    print(messages["tale_response"][rand_tale_response])
+    bg_pid.kill()
+    return subprocess.Popen(["mpg123", "audio/messages/tale_response{}.mp3".format(rand_tale_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 def play_background():
     with open("background_music.json") as b:
         bg_music = json.load(b)
 
     filename = random.choice(list(bg_music.keys()))
+    print("Playing ambience from", filename)
     # Call out to OS to play the audio in a new process
-    return subprocess.Popen(["mpg123", filename])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
@@ -40,13 +50,14 @@ if __name__ == '__main__':
     bg_pid = play_background()
 
     while True:
-        if not welcomed:
+        if not welcomed and random.randint(0,100) < 12:
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
             id, text = reader.read()
             print(id)
             random_muse_response(text, bg_pid)
+            time.sleep(random.randint(30, 60))
             welcomed = False
         except KeyboardInterrupt:
             print("Goodbye!")
