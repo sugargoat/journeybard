@@ -2,18 +2,14 @@
 
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
+import subprocess
 import time
-
-import simpleaudio as sa
-
-
 
 def play_background():
     filename = 'audio/Underground_Lake.mp3'
-    wave_obj = sa.WaveObject.from_wave_file(filename)
-    play_obj = wave_obj.play()
-    play_obj.wait_done()  # Wait until sound has finished playing
 
+    # Call out to OS to play the audio in a new process
+    subprocess.run("mpg123 {}".format(filename), shell=True, check=False)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
