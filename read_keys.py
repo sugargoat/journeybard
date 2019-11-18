@@ -16,8 +16,10 @@ def random_welcome(bg_pid):
     return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
-    filename = 'audio/Underground_Lake.mp3'
+    with open("background_music.json") as b:
+        bg_music = json.load(b)
 
+    filename = random.choice(bg_music.keys())
     # Call out to OS to play the audio in a new process
     return subprocess.Popen(["mpg123", filename], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 

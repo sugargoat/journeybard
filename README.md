@@ -16,10 +16,24 @@ Force audio output to headphone jack
 Advanced Options > Audio > Force Headphone Jack
 
 
-## Get background music
+## Set Up Audio
+
+This script downloads all the background music specified in background_music.json, and creates speech-to-text for all the phrases in messages.json
 
 ```
-    wget --output-document Underground_lake.mp3 https://tabletopaudio.com/download.php?downld_file=184_Underground_Lake.mp3
+    setup_audio.py
+```
+
+## Set up Keys
+
+```
+    setup_keys.py
+```
+
+## Run the Interactive Program
+
+```
+    read_keys.py
 ```
 
 ## References
