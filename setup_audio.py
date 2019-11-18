@@ -20,7 +20,7 @@ if __name__ == '__main__':
         for i, text in enumerate(texts):
             if '__' in text:
                 for key in keys:
-                    tts = gTTS(text.replace('__', key))
+                    tts = gTTS(text.replace('__', key).replace('_', ' '))
                     tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
             else:
                 tts = gTTS(text)

@@ -53,6 +53,6 @@ if __name__ == '__main__':
             GPIO.cleanup()
             exit()
         except Exception as e:
-            print("Unfortunately, we cannot hear the tale of {} at the moment".format(text.strip()))
+            print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
             welcomed = False
         time.sleep(3)
