@@ -9,7 +9,7 @@ def play_background():
     filename = 'audio/Underground_Lake.mp3'
 
     # Call out to OS to play the audio in a new process
-    subprocess.run("mpg123 {}".format(filename), shell=True, check=False)
+    return subprocess.Popen(["mpg123", filename])
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     welcomed = False
 
     # Fixme: do this in a separate thread
-    play_background()
+    bg_pid = play_background()
 
     while True:
         if not welcomed:

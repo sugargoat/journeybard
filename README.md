@@ -10,7 +10,7 @@ Force audio output to headphone jack
 
 ```
     amixer cset numid=3 1
-        raspi-config
+    raspi-config
 ```
 
 Advanced Options > Audio > Force Headphone Jack
