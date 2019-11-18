@@ -38,7 +38,7 @@ def play_background():
     filename = random.choice(list(bg_music.keys()))
     print("Playing ambience from", filename)
     # Call out to OS to play the audio in a new process
-    return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)]), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
