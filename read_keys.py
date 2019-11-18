@@ -15,6 +15,14 @@ def random_welcome(bg_pid):
     bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+def random_muse_response(key, bg_pid):
+    with open("messages.json") as m:
+        messages = json.load(m)
+    rand_muse_response = random.randint(0, len(messages["muse_return"] - 1))
+    print(messages["muse_return"][rand_muse_response].replace('__', key))
+    bg_pid.kill()
+    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key, rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 def play_background():
     with open("background_music.json") as b:
         bg_music = json.load(b)
@@ -38,7 +46,7 @@ if __name__ == '__main__':
         try:
             id, text = reader.read()
             print(id)
-            print("Ah, the {} has returned. Do tell us of your journey.".format(text.strip()))
+            random_muse_response(text, bg_pid)
             welcomed = False
         except KeyboardInterrupt:
             print("Goodbye!")
