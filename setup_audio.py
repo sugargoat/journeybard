@@ -3,6 +3,7 @@
 import json
 import os
 import subprocess
+import sys
 from gtts import gTTS
 
 if __name__ == '__main__':
@@ -26,10 +27,11 @@ if __name__ == '__main__':
                 tts = gTTS(text)
                 tts.save('audio/messages/{}{}.mp3'.format(category, i))
 
-    # Set up background music
-    with open("background_music.json") as b:
-        bg_music = json.load(b)
+    if '--bg-music' in sys.argv:
+        # Set up background music
+        with open("background_music.json") as b:
+            bg_music = json.load(b)
 
-    os.makedirs("audio/background", exist_ok=True)
-    for filename, download_addr in bg_music.items():
-        subprocess.Popen(["wget", "--output-document", "audio/background/{}".format(filename), download_addr])
+        os.makedirs("audio/background", exist_ok=True)
+        for filename, download_addr in bg_music.items():
+            subprocess.Popen(["wget", "--output-document", "audio/background/{}".format(filename), download_addr])
