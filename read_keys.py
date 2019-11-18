@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 
+import json
 import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
+import random
 import subprocess
 import time
+from mfrc522 import SimpleMFRC522
+
+def random_welcome():
+    with open("messages.json") as m:
+        messages = json.load(m)
+    rand_welcome = random.randint(0, len(messages["welcome"]) - 1)
+    print("\n~=~=~=~=~=~=~=\n{}\n".format(rand_welcome))
+    return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
     filename = 'audio/Underground_Lake.mp3'
@@ -21,7 +30,7 @@ if __name__ == '__main__':
 
     while True:
         if not welcomed:
-            print("\n~=~=~=~=~=~=~=\nWelcome to the storied pages of the BardGuild. Please present your muse.\n")
+            rw_pid = random_welcome()
             welcomed = True
         try:
             id, text = reader.read()
