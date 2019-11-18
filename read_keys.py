@@ -7,11 +7,12 @@ import subprocess
 import time
 from mfrc522 import SimpleMFRC522
 
-def random_welcome():
+def random_welcome(bg_pid):
     with open("messages.json") as m:
         messages = json.load(m)
     rand_welcome = random.randint(0, len(messages["welcome"]) - 1)
-    print("\n~=~=~=~=~=~=~=\n{}\n".format(rand_welcome))
+    print("\n~=~=~=~=~=~=~=\n{}\n".format(messages["welcome"][rand_welcome]))
+    bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
@@ -30,7 +31,7 @@ if __name__ == '__main__':
 
     while True:
         if not welcomed:
-            rw_pid = random_welcome()
+            rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
             id, text = reader.read()
