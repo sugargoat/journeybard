@@ -32,4 +32,4 @@ if __name__ == '__main__':
 
     os.makedirs("audio/background", exist_ok=True)
     for filename, download_addr in bg_music.items():
-        subprocess.Popen(["wget", "--output-document", "audio/background_music/{}".format(filename), download_addr])
+        subprocess.Popen(["wget", "--output-document", "audio/background/{}".format(filename), download_addr])
