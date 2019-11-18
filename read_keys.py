@@ -21,7 +21,7 @@ def random_muse_response(key, bg_pid):
     rand_muse_response = random.randint(0, len(messages["muse_return"]) - 1)
     print(messages["muse_return"][rand_muse_response].replace('__', key.strip()))
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key.strip(), rand_muse_response)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key.strip(), rand_muse_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
     with open("background_music.json") as b:
@@ -29,7 +29,7 @@ def play_background():
 
     filename = random.choice(list(bg_music.keys()))
     # Call out to OS to play the audio in a new process
-    return subprocess.Popen(["mpg123", filename], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", filename])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
@@ -55,4 +55,4 @@ if __name__ == '__main__':
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
             welcomed = False
-        time.sleep(3)
+        time.sleep(5)
