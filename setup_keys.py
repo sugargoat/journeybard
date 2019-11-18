@@ -2,6 +2,8 @@
 
 import json
 import RPi.GPIO as GPIO
+import time
+
 from mfrc522 import SimpleMFRC522
 
 # FIXME: make this read from a json file
@@ -17,6 +19,7 @@ if __name__ == '__main__':
         try:
             print("Now place the tag for {} to write".format(key))
             reader.write(key)
-            print("Wrote {} to tag.".format(key))
+            print("Wrote {} to tag. Waiting 5 seconds.".format(key))
+            time.sleep(5)
         finally:
             GPIO.cleanup()
