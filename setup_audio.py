@@ -9,7 +9,7 @@ from gtts import gTTS
 if __name__ == '__main__':
 
     if '--messages' in sys.argv:
-        # Set up messages
+        print("Now setting up audio for voice messages")
         with open("messages.json") as m:
             messages = json.load(m)
 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
                     tts.save('audio/messages/{}{}.mp3'.format(category, i))
 
     if '--bg-music' in sys.argv:
-        # Set up background music
+        print("Now setting up audio for background music")
         with open("background_music.json") as b:
             bg_music = json.load(b)
 

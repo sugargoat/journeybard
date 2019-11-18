@@ -31,7 +31,6 @@ def random_tale_response(bg_pid):
     bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/tale_response{}.mp3".format(rand_tale_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-
 def play_background():
     with open("background_music.json") as b:
         bg_music = json.load(b)
@@ -39,7 +38,7 @@ def play_background():
     filename = random.choice(list(bg_music.keys()))
     print("Playing ambience from", filename)
     # Call out to OS to play the audio in a new process
-    return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)])#, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)]), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
@@ -50,7 +49,7 @@ if __name__ == '__main__':
     bg_pid = play_background()
 
     while True:
-        if not welcomed and random.randint(0,100) < 12:
+        if not welcomed# and random.randint(0,100) < 12: FIXME: Something here to make it invite people in
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
