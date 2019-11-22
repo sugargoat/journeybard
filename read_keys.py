@@ -79,3 +79,4 @@ if __name__ == '__main__':
             exit()
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
+    sleep(5)
