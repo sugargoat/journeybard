@@ -16,9 +16,6 @@ if __name__ == '__main__':
         with open("keys.json") as k:
             keys = json.load(k)
 
-        with open("destinations.json") as k:
-            keys = json.load(k)
-
         os.makedirs("audio/messages", exist_ok=True)
 
         for category, texts in messages.items():
