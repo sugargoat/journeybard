@@ -1,7 +1,7 @@
 {
     "welcome": ["Welcome to the storied pages of the Bard Guild. Please present your muse."],
     "journey_prompt": ["Oh yes, the __. Take this muse to **, where you will have an adventure and return with a tale to entertain us. Perhaps then, you will prove to be worthy of the Bard Guild."],
-    "muse_return": ["Ah, the __ has returned. Do tell us of your journey."],
+    "muse_return": ["Ah, the __ has returned. Do tell us of your journey. If it is worthy, you may even write it on the pages of the Bard Guild."],
     "tale_response": [
         "Thank you for that riveting tale. Please continue forth as a Build Gard Apprentice!",
         "I'm going to stop you right there. That is not a tale worthy of the Bard Guild. Please take another muse for inspiration and return to try again."
