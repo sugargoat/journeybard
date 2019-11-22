@@ -72,6 +72,7 @@ if __name__ == '__main__':
                 # Sleep while the journeyer either relays a story, or wanders off
                 time.sleep(random.randint(30, 60))
                 random_tale_response(bg_pid)
+                time.sleep(10)
             else:
                 journey_prompt(key, bg_pid)
                 out_muses.add(key)
