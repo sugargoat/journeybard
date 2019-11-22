@@ -86,4 +86,5 @@ if __name__ == '__main__':
         # Randomly reset to invite people in
         if random.randint(0, 100) < 12:
             welcomed = False
+        print('.', end='')
         time.sleep(5)

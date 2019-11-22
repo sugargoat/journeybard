@@ -17,9 +17,9 @@ if __name__ == '__main__':
 
     for key in keys.keys():
         try:
-            print("Now place the tag for {} to write".format(key))
+            print("\nNow place the tag for {} to write".format(key))
             reader.write(key)
-            print("Wrote {} to tag. Waiting 5 seconds.".format(key))
+            print("\tWrote {} to tag. Waiting 5 seconds.".format(key))
             time.sleep(5)
         except Exception as e:
             print("Got exception {}".format(repr(e)))
