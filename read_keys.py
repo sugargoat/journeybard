@@ -58,7 +58,7 @@ if __name__ == '__main__':
     # Fixme: do this in a separate thread
     bg_pid = play_background()
 
-    out_muses = {}
+    out_muses = set()
 
     while True:
         # FIXME: Should use an IR sensor to play welcome when people approach
