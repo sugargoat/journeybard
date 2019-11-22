@@ -24,12 +24,12 @@ if __name__ == '__main__':
                 if '__' in text:
                     for key, destination in keys.items():
                         replaced = text.replace('__', key).replace('_', ' ').replace('**', destination)
-                        print('now saving text {} to {}{}{}.mp3'.format(text, category, key, i))
+                        print('now saving text {} to {}{}{}.mp3'.format(replaced, category, key, i))
                         tts = gTTS(replaced)
-                        tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
+                        tts.save('audio/messages/{}_{}_{}.mp3'.format(category, key, i))
                 else:
                     tts = gTTS(text)
-                    tts.save('audio/messages/{}{}.mp3'.format(category, i))
+                    tts.save('audio/messages/{}_{}.mp3'.format(category, i))
 
     if '--bg-music' in sys.argv:
         print("Now setting up audio for background music")

@@ -11,9 +11,9 @@ def random_welcome(bg_pid):
     with open("messages.json") as m:
         messages = json.load(m)
     rand_welcome = random.randint(0, len(messages["welcome"]) - 1)
-    print("\n~=~=~=~=~=~=~=\n{}\n".format(messages["welcome"][rand_welcome]))
+    print("\n\t\t\t\t~=~=~=~=~=~=~=\n{}\n".format(messages["welcome"][rand_welcome]))
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/welcome{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/welcome_{}.mp3".format(rand_welcome)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def random_muse_response(key, bg_pid):
     with open("messages.json") as m:
@@ -21,7 +21,7 @@ def random_muse_response(key, bg_pid):
     rand_muse_response = random.randint(0, len(messages["muse_return"]) - 1)
     print(messages["muse_return"][rand_muse_response].replace('__', key.strip()).replace('_', ' '))
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/muse_return{}{}.mp3".format(key.strip(), rand_muse_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/muse_return_{}_{}.mp3".format(key.strip(), rand_muse_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def random_tale_response(bg_pid):
     with open("messages.json") as m:
@@ -29,7 +29,7 @@ def random_tale_response(bg_pid):
     rand_tale_response = random.randint(0, len(messages["tale_response"]) - 1)
     print(messages["tale_response"][rand_tale_response])
     bg_pid.kill()
-    return subprocess.Popen(["mpg123", "audio/messages/tale_response{}.mp3".format(rand_tale_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/tale_response_{}.mp3".format(rand_tale_response)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def play_background():
     with open("background_music.json") as b:
@@ -49,7 +49,7 @@ def journey_prompt(key, bg_pid):
     print(messages["journey_prompt"][rand_journey_prompt].replace('__', key.strip()).replace('_', ' ').replace('**', keys[key.strip()]))
     bg_pid.kill()
     print("Playing audio for", key.strip(), rand_journey_prompt)
-    return subprocess.Popen(["mpg123", "audio/messages/journey_prompt{}{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return subprocess.Popen(["mpg123", "audio/messages/journey_prompt_{}_{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
