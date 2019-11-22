@@ -21,7 +21,7 @@ if __name__ == '__main__':
         for category, texts in messages.items():
             for i, text in enumerate(texts):
                 if '__' in text:
-                    for key, destination in keys:
+                    for key, destination in keys.items():
                         text = text.replace('__', key).replace('_', ' ').replace('**', destination)
                         tts = gTTS(text)
                         tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
