@@ -67,7 +67,7 @@ if __name__ == '__main__':
             print(id)
             print("current out muses = ", out_muses)
 
-            if text in out_muses:
+            if text.strip() in out_muses:
                 print('The muse has returned!')
                 random_muse_response(text, bg_pid)
                 out_muses.delete(text)
@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 print('This muse is about to go out')
                 journey_prompt(text, bg_pid)
                 out_muses.add(text.strip())
-                time.sleep(8)
+                time.sleep(15)
 
         except KeyboardInterrupt:
             print("Goodbye!")
