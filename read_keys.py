@@ -75,7 +75,7 @@ if __name__ == '__main__':
                 out_muses.delete(text)
             else:
                 journey_prompt(text, bg_pid)
-                out_muses.add(text)
+                out_muses.add(text.strip())
 
             # Sleep while the journeyer either relays a story, or wanders off
             time.sleep(random.randint(30, 60))
