@@ -64,19 +64,16 @@ if __name__ == '__main__':
             rw_pid = random_welcome(bg_pid)
             # Read continuously until an RFID tag is presented
             id, text = reader.read()
-            print(id)
-            print("current out muses = ", out_muses)
+            key = text.strip()
 
-            if text.strip() in out_muses:
-                print('The muse has returned!')
-                random_muse_response(text, bg_pid)
-                out_muses.delete(text)
+            if key in out_muses:
+                random_muse_response(key, bg_pid)
+                out_muses.remove(key)
                 # Sleep while the journeyer either relays a story, or wanders off
                 time.sleep(random.randint(30, 60))
             else:
-                print('This muse is about to go out')
-                journey_prompt(text, bg_pid)
-                out_muses.add(text.strip())
+                journey_prompt(key, bg_pid)
+                out_muses.add(key)
                 time.sleep(15)
 
         except KeyboardInterrupt:
