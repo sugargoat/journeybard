@@ -64,6 +64,7 @@ if __name__ == '__main__':
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
+            print('debug: now reading')
             id, text = reader.read()
             print(id)
 
@@ -87,4 +88,4 @@ if __name__ == '__main__':
         if random.randint(0, 100) < 12:
             welcomed = False
         print('.', end='')
-        time.sleep(5)
+        time.sleep(1)
