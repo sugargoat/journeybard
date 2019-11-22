@@ -44,14 +44,12 @@ def journey_prompt(key, bg_pid):
     with open("messages.json") as m:
         messages = json.load(m)
     rand_journey_prompt = random.randint(0, len(messages["journey_prompt"]) - 1)
-    print(messages["journey_prompt"][rand_muse_response].replace('__', key.strip()).replace('_', ' '))
+    print(messages["journey_prompt"][rand_journey_prompt].replace('__', key.strip()).replace('_', ' '))
     bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/journey_prompt{}{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
     reader = SimpleMFRC522()
-
-    welcomed = False
 
     # Fixme: do this in a separate thread
     bg_pid = play_background()
@@ -60,11 +58,9 @@ if __name__ == '__main__':
 
     while True:
         # FIXME: Should use an IR sensor to play welcome when people approach
-        if not welcomed:
-            rw_pid = random_welcome(bg_pid)
-            welcomed = True
         try:
-            print('debug: now reading')
+            rw_pid = random_welcome(bg_pid)
+            # Read continuously until an RFID tag is presented
             id, text = reader.read()
             print(id)
 
@@ -75,17 +71,11 @@ if __name__ == '__main__':
                 journey_prompt(text, bg_pid)
                 out_muses.add(text)
 
+            # Sleep while the journeyer either relays a story, or wanders off
             time.sleep(random.randint(30, 60))
-            welcomed = False
         except KeyboardInterrupt:
             print("Goodbye!")
             GPIO.cleanup()
             exit()
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
-            welcomed = False
-        # Randomly reset to invite people in
-        if random.randint(0, 100) < 12:
-            welcomed = False
-        print('.', end='')
-        time.sleep(1)
