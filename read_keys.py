@@ -51,6 +51,8 @@ def journey_prompt(key, bg_pid):
 if __name__ == '__main__':
     reader = SimpleMFRC522()
 
+    welcomed = False
+
     # Fixme: do this in a separate thread
     bg_pid = play_background()
 
@@ -58,11 +60,13 @@ if __name__ == '__main__':
 
     while True:
         # FIXME: Should use an IR sensor to play welcome when people approach
-        try:
+        if not welcomed:
             rw_pid = random_welcome(bg_pid)
+            welcomed = True
+
+        try:
             # Read continuously until an RFID tag is presented
             id, text = reader.read()
-            print(id)
 
             if text in out_muses:
                 random_muse_response(text, bg_pid)
@@ -73,10 +77,12 @@ if __name__ == '__main__':
 
             # Sleep while the journeyer either relays a story, or wanders off
             time.sleep(random.randint(30, 60))
+            welcomed = False
         except KeyboardInterrupt:
             print("Goodbye!")
             GPIO.cleanup()
             exit()
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
-    sleep(5)
+            welcomed = False
+    time.sleep(5)
