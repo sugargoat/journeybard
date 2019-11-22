@@ -48,6 +48,7 @@ def journey_prompt(key, bg_pid):
     rand_journey_prompt = random.randint(0, len(messages["journey_prompt"]) - 1)
     print(messages["journey_prompt"][rand_journey_prompt].replace('__', key.strip()).replace('_', ' ').replace('**', keys[key.strip()]))
     bg_pid.kill()
+    print("Playing audio for", key.strip(), rand_journey_prompt)
     return subprocess.Popen(["mpg123", "audio/messages/journey_prompt{}{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
@@ -70,12 +71,12 @@ if __name__ == '__main__':
             if text in out_muses:
                 random_muse_response(text, bg_pid)
                 out_muses.delete(text)
+                # Sleep while the journeyer either relays a story, or wanders off
+                time.sleep(random.randint(30, 60))
             else:
                 journey_prompt(text, bg_pid)
                 out_muses.add(text.strip())
 
-            # Sleep while the journeyer either relays a story, or wanders off
-            time.sleep(random.randint(30, 60))
         except KeyboardInterrupt:
             print("Goodbye!")
             GPIO.cleanup()

@@ -23,6 +23,7 @@ if __name__ == '__main__':
                 if '__' in text:
                     for key, destination in keys.items():
                         text = text.replace('__', key).replace('_', ' ').replace('**', destination)
+                        print('now saving text {} to {}{}{}.mp3'.format(text, category, key, i))
                         tts = gTTS(text)
                         tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
                 else:
