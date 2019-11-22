@@ -36,15 +36,17 @@ def play_background():
         bg_music = json.load(b)
 
     filename = random.choice(list(bg_music.keys()))
-    print("Playing ambience from", filename)
+    print("Playing ambience from", filename.strip('.mp3'))
     # Call out to OS to play the audio in a new process
     return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def journey_prompt(key, bg_pid):
     with open("messages.json") as m:
         messages = json.load(m)
+    with open("keys.json") as k:
+        keys = json.load(k)
     rand_journey_prompt = random.randint(0, len(messages["journey_prompt"]) - 1)
-    print(messages["journey_prompt"][rand_journey_prompt].replace('__', key.strip()).replace('_', ' '))
+    print(messages["journey_prompt"][rand_journey_prompt].replace('__', key.strip()).replace('_', ' ').replace('**', keys[key]))
     bg_pid.kill()
     return subprocess.Popen(["mpg123", "audio/messages/journey_prompt{}{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
