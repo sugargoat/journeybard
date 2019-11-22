@@ -87,4 +87,4 @@ if __name__ == '__main__':
         except Exception as e:
             print("Unfortunately, we cannot hear the tale of {} at the moment, due to {}".format(text.strip(), repr(e)))
             welcomed = False
-    time.sleep(5)
+        time.sleep(5)
