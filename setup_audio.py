@@ -16,13 +16,17 @@ if __name__ == '__main__':
         with open("keys.json") as k:
             keys = json.load(k)
 
+        with open("destinations.json") as k:
+            keys = json.load(k)
+
         os.makedirs("audio/messages", exist_ok=True)
 
         for category, texts in messages.items():
             for i, text in enumerate(texts):
                 if '__' in text:
-                    for key in keys:
-                        tts = gTTS(text.replace('__', key).replace('_', ' '))
+                    for key, destination in keys:
+                        text = text.replace('__', key).replace('_', ' ').replace('**', destination)
+                        tts = gTTS(text)
                         tts.save('audio/messages/{}{}{}.mp3'.format(category, key, i))
                 else:
                     tts = gTTS(text)

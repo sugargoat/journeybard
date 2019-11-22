@@ -40,6 +40,14 @@ def play_background():
     # Call out to OS to play the audio in a new process
     return subprocess.Popen(["mpg123", "audio/background/{}".format(filename)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+def journey_prompt(key, bg_pid):
+    with open("messages.json") as m:
+        messages = json.load(m)
+    rand_journey_prompt = random.randint(0, len(messages["journey_prompt"]) - 1)
+    print(messages["journey_prompt"][rand_muse_response].replace('__', key.strip()).replace('_', ' '))
+    bg_pid.kill()
+    return subprocess.Popen(["mpg123", "audio/messages/journey_prompt{}{}.mp3".format(key.strip(), rand_journey_prompt)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 if __name__ == '__main__':
     reader = SimpleMFRC522()
 
@@ -48,14 +56,24 @@ if __name__ == '__main__':
     # Fixme: do this in a separate thread
     bg_pid = play_background()
 
+    out_muses = {}
+
     while True:
+        # FIXME: Should use an IR sensor to play welcome when people approach
         if not welcomed:
             rw_pid = random_welcome(bg_pid)
             welcomed = True
         try:
             id, text = reader.read()
             print(id)
-            random_muse_response(text, bg_pid)
+
+            if text in out_muses:
+                random_muse_response(text, bg_pid)
+                out_muses.delete(text)
+            else:
+                journey_prompt(text, bg_pid)
+                out_muses.add(text)
+
             time.sleep(random.randint(30, 60))
             welcomed = False
         except KeyboardInterrupt:

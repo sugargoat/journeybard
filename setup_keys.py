@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     print(keys)
 
-    for key in keys:
+    for key in keys.keys():
         try:
             print("Now place the tag for {} to write".format(key))
             reader.write(key)
