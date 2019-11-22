@@ -64,6 +64,8 @@ if __name__ == '__main__':
             rw_pid = random_welcome(bg_pid)
             # Read continuously until an RFID tag is presented
             id, text = reader.read()
+            print(id)
+            print("current out muses = ", out_muses)
 
             if text in out_muses:
                 random_muse_response(text, bg_pid)
