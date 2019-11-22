@@ -15,6 +15,7 @@ if __name__ == '__main__':
 
         with open("keys.json") as k:
             keys = json.load(k)
+            print("got keys", keys)
 
         os.makedirs("audio/messages", exist_ok=True)
 
