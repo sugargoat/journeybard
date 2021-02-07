@@ -8,13 +8,20 @@ There are 3 phases:
 1. [Party Initiatialize](#party-initialize)
 1. [Maintenance/Updates](#party-maintenance)
 
+# IMPORTANT INFO:
+
+* the login for the pi is `pi` with password `cubegarden`.
+* The hostname is `cubedev`, so once you have internet, you can ssh to `pi@cubedev.local`.
+* the code is already loaded, and the background music already downloaded at ~/code/journeybard
+
 ## Set Up
 
 (All of the set up phase has already been done for the raspberry pi)
 
 1. You will need the following materials:
 
-    * raspberry pii
+    * Raspberry pi + power supply + keyboard + monitor
+    * Speakers
     * RFID reader
     * female-to-female jumper cables
     * soldering kit for RFID reader
@@ -44,7 +51,7 @@ Select: Advanced Options > Audio > Force Headphone Jack
 
 To get ready for the party, you will need to:
 
-1. Make sure the pi has internet (only necessary to download background music or pull down changes to the repo, not necessary throughout the party) 
+1. Make sure the pi has internet (only necessary to download background music or pull down changes to the repo, not necessary throughout the party)
     * update internet with raspi-config
 1. Update the muses list with any found items
 1. Register each RFID tag with the associated muse.
@@ -89,7 +96,7 @@ In general, it should be good-to-go (with the exception of adding muses). The fo
 
     * Address bugs that arise (there will certainly be bugs)
     * Add messages to send people to specific rooms/destinations for certain muses.
-    
+
 ## Lore
 
 Here is the additional lore:
@@ -111,4 +118,3 @@ There they will have an adventure, and if they return, and we feel their story w
 If they fail to delight us with their adventure take, they can choose to give their apprentice button to someone else, or to try again.
 
 The Journeybard is given a button to recruit an apprentice, and asked to return and tell us the tale. If they impress this time, they become full BardGuild members and are allowed to write a sentence of their choosing on the empty door, telling the story of the RS19 BardGuild.
-
